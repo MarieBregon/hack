@@ -220,24 +220,41 @@
   const commandElement = document.getElementById('command');
   const cursor = document.querySelector('.cursor');
 
-  const command = 'htop'; // Команда, которую будем "набирать"
-  const outputData = `
+  const commands = [
+    {command: 'htop', output: `
 PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
 345 root      20   0  162948  12480   7520 S   1.2   0.3   0:00.85 htop
 567 user      20   0  102384   8320   3216 S   0.8   0.2   0:00.64 bash
 789 systemd   20   0   84928   5724   2048 S   0.5   0.1   0:00.41 systemd
 1008 sshd     20   0   75480   6256   1444 S   0.4   0.2   0:00.50 sshd
 1234 apache   20   0  128360  18720   6232 S   0.3   0.4   0:01.12 apache
-...
-  `; // Пример вывода "файловых данных" после выполнения команды
+...`},
+    {command: 'nano network_test.py', output: `
+def check_network():
+    import os
+    hostname = "google.com"
+    response = os.system("ping -c 1 " + hostname)
+    
+    if response == 0:
+        print(f"{hostname} is reachable.")
+    else:
+        print(f"{hostname} is not reachable.")
 
-let currentIndex = 0;
+check_network()
+`},
+    {command: 'python3 network_test.py', output: `
+google.com is reachable.
+`}
+  ];
+
+let currentCommandIndex = 0;
+let currentCharIndex = 0;
 
 function typeCommand() {
-  // Симуляция печати команды
-  if (currentIndex < command.length) {
-    commandElement.textContent += command[currentIndex];
-    currentIndex++;
+  const currentCommand = commands[currentCommandIndex];
+  if (currentCharIndex < currentCommand.command.length) {
+    commandElement.textContent += currentCommand.command[currentCharIndex];
+    currentCharIndex++;
     setTimeout(typeCommand, 100); // Пауза между вводом символов
   } else {
     cursor.remove(); // Удаляем мигающий курсор после ввода команды
@@ -246,11 +263,19 @@ function typeCommand() {
 }
 
 function displayOutput() {
-  // Имитация вывода данных после выполнения команды
-  bashContent.innerHTML += `\n<span class="bash-line">Loading...</span>\n`; // Имитируем загрузку
+  const currentCommand = commands[currentCommandIndex];
+  bashContent.innerHTML += `\n<span class="bash-line">${currentCommand.output}</span>\n`; // Вывод результата команды
+
+  currentCommandIndex = (currentCommandIndex + 1) % commands.length; // Переход к следующей команде
+  currentCharIndex = 0; // Сброс для следующей команды
+
+  // Добавляем новый курсор и запускаем цикл заново
   setTimeout(() => {
-    bashContent.innerHTML += `<span class="bash-line">${outputData}</span>\n`;
-  }, 500); // Задержка для эффекта
+    bashContent.innerHTML += `<span class="bash-line"><span class="prompt">user@localhost:~$ </span><span id="command"></span><span class="cursor"></span></span>`;
+    commandElement = document.getElementById('command');
+    cursor = document.querySelector('.cursor');
+    typeCommand();
+  }, 2000); // Пауза перед началом новой команды
 }
 
 // Запускаем набор команды после загрузки страницы
