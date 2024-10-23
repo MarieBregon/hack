@@ -159,6 +159,74 @@
         font-size: 24px;
       }
     }
+
+    /* Секция установки тренеров */
+    .monitoring-section {
+      padding: 50px;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      text-align: center;
+    }
+
+    .monitoring-section h3 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    /* Футер */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px;
+      background-color: #0a0a0a;
+      color: #00ffcc;
+      border-top: 2px solid #00ffcc;
+    }
+
+    footer .contact-form, footer .vacancy {
+      width: 45%;
+    }
+
+    footer .vacancy {
+      text-align: left;
+    }
+
+    footer form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    footer input, footer textarea, footer button {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #00ffcc;
+      border-radius: 5px;
+      background-color: #1a1a1a;
+      color: #00ffcc;
+    }
+
+    footer button {
+      background-color: #00ffcc;
+      color: #000;
+      cursor: pointer;
+    }
+
+    footer button:hover {
+      background-color: #ff00ff;
+    }
+
+    footer .telegram {
+      margin-top: 10px;
+      display: block;
+      text-align: right;
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    footer .telegram:hover {
+      color: #ff00ff;
+    }
   </style>
 </head>
 <body>
@@ -205,20 +273,34 @@
   </div>
 </section>
 
+<!-- Секция по установке тренеров -->
+<section class="monitoring-section" id="monitoring">
+  <h3>Установка Мобильных Тренеров</h3>
+  <p>Мы поможем вам установить на мобильные устройства тренера для отслеживания действий, включая фото, видео и переписки.</p>
+</section>
+
 <footer id="contact">
-  <h3>Свяжитесь с Нами</h3>
-  <form>
-    <input type="text" name="name" placeholder="Ваше Имя" required>
-    <input type="email" name="email" placeholder="Ваш Email" required>
-    <textarea name="message" placeholder="Ваше Сообщение" rows="5" required></textarea>
-    <button type="submit">Отправить</button>
-  </form>
+  <div class="vacancy">
+    <h3>Вакансия</h3>
+    <p>Мы ищем хакеров для работы в нашей команде! Если вы обладаете навыками в области кибербезопасности и готовы к новым вызовам, свяжитесь с нами!</p>
+  </div>
+
+  <div class="contact-form">
+    <h3>Свяжитесь с Нами</h3>
+    <form>
+      <input type="text" name="name" placeholder="Ваше Имя" required>
+      <input type="email" name="email" placeholder="Ваш Email" required>
+      <textarea name="message" placeholder="Ваше Сообщение" rows="5" required></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+    <a href="https://t.me/yourtelegram" class="telegram">Напишите нам в Telegram</a>
+  </div>
 </footer>
 
 <script>
-  const bashContent = document.getElementById('bash-content');
-  const commandElement = document.getElementById('command');
-  const cursor = document.querySelector('.cursor');
+  let bashContent = document.getElementById('bash-content');
+  let commandElement = document.getElementById('command');
+  let cursor = document.querySelector('.cursor');
 
   const commands = [
     {command: 'htop', output: `
