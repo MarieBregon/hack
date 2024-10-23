@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Этичные хакерские услуги по кибербезопасности. Тестирование на проникновение, аудит безопасности, защита данных.">
-  <title>Эффект Bash консоли</title>
+  <title>Этичные Хакерские Услуги</title>
   <style>
     body {
       margin: 0;
@@ -105,10 +105,58 @@
       100% { opacity: 1; }
     }
 
+    /* Секции */
+    .section {
+      padding: 50px;
+      text-align: center;
+      background-color: #0d0d0d;
+      border-bottom: 2px solid #00ffcc;
+    }
+
+    .section h3 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #00ffcc;
+    }
+
+    .block {
+      display: inline-block;
+      width: 30%;
+      margin: 20px 10px;
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .block:hover {
+      transform: translateY(-10px);
+    }
+
     /* Адаптивный дизайн */
     @media (max-width: 768px) {
-      .bash-terminal {
+      .block {
         width: 100%;
+        margin: 20px 0;
+      }
+
+      .section h3 {
+        font-size: 24px;
+      }
+
+      nav a {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .bash-terminal {
+        width: 95%;
+      }
+
+      .section h3 {
+        font-size: 24px;
       }
     }
   </style>
@@ -126,7 +174,7 @@
   </nav>
 </header>
 
-<!-- Bash консоль -->
+<!-- Bash консоль с эффектом набора команды -->
 <div class="bash-terminal">
   <div class="bash-header">
     <span>user@localhost: ~</span>
@@ -138,6 +186,34 @@
     </span>
   </div>
 </div>
+
+<section class="section" id="services">
+  <h3>Наши Услуги</h3>
+  <div class="block">
+    <h4>Тестирование на проникновение</h4>
+    <p>Мы выявляем уязвимости вашей системы до того, как это сделают хакеры.</p>
+  </div>
+
+  <div class="block">
+    <h4>Аудит безопасности</h4>
+    <p>Проверьте защищенность ваших данных и систем с помощью детального аудита безопасности.</p>
+  </div>
+
+  <div class="block">
+    <h4>Консультации по защите данных</h4>
+    <p>Получите рекомендации по лучшим практикам для защиты данных вашего бизнеса.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <h3>Свяжитесь с Нами</h3>
+  <form>
+    <input type="text" name="name" placeholder="Ваше Имя" required>
+    <input type="email" name="email" placeholder="Ваш Email" required>
+    <textarea name="message" placeholder="Ваше Сообщение" rows="5" required></textarea>
+    <button type="submit">Отправить</button>
+  </form>
+</footer>
 
 <script>
   const bashContent = document.getElementById('bash-content');
