@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Этичные хакерские услуги по кибербезопасности. Тестирование на проникновение, аудит безопасности, защита данных.">
-  <title>Услуги Этичного Хакера</title>
+  <title>Эффект Bash консоли</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Courier New', monospace;
       background-color: #0d0d0d;
-      color: #f0f0f0;
+      color: #00ffcc;
     }
 
     header {
@@ -45,76 +45,70 @@
       color: #ff00ff;
     }
 
-    /* Эффект бегущего кода */
-    .code-effect {
-      font-family: 'Courier New', monospace;
-      color: #00ffcc;
-      background-color: #0d0d0d;
+    /* Bash консоль */
+    .bash-terminal {
+      background-color: #1c1c1c;
+      border-radius: 5px;
+      border: 2px solid #00ffcc;
       padding: 20px;
-      height: 200px;
-      overflow: hidden;
+      width: 80%;
+      max-width: 800px;
+      margin: 40px auto;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
       position: relative;
-      border-bottom: 2px solid #00ffcc;
     }
 
-    .code-line {
-      white-space: nowrap;
-      font-size: 16px;
-      margin: 0;
+    .bash-header {
+      background-color: #333;
+      padding: 10px;
+      border-radius: 5px 5px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    /* Секции */
-    .section {
-      padding: 50px;
-      text-align: center;
-      background-color: #0d0d0d;
-      border-bottom: 2px solid #00ffcc;
+    .bash-header span {
+      color: #fff;
     }
 
-    .section h3 {
-      font-size: 32px;
-      margin-bottom: 30px;
+    .bash-content {
+      background-color: #000;
+      padding: 20px;
+      border-radius: 0 0 5px 5px;
+      color: #00ffcc;
+      font-size: 14px;
+      min-height: 300px;
+      white-space: pre-line;
+    }
+
+    .bash-line {
+      display: block;
+    }
+
+    .bash-line .prompt {
       color: #00ffcc;
     }
 
-    .block {
+    /* Курсор */
+    .cursor {
       display: inline-block;
-      width: 30%;
-      margin: 20px 10px;
-      background-color: #1a1a1a;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease;
+      width: 10px;
+      height: 18px;
+      background-color: #00ffcc;
+      animation: blink 1s steps(2, start) infinite;
+      vertical-align: bottom;
     }
 
-    .block:hover {
-      transform: translateY(-10px);
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     /* Адаптивный дизайн */
     @media (max-width: 768px) {
-      .block {
+      .bash-terminal {
         width: 100%;
-        margin: 20px 0;
-      }
-
-      .section h3 {
-        font-size: 24px;
-      }
-
-      nav a {
-        font-size: 16px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .code-effect {
-        height: 150px;
-      }
-
-      .section h3 {
-        font-size: 24px;
       }
     }
   </style>
@@ -132,69 +126,61 @@
   </nav>
 </header>
 
-<div class="code-effect" id="code-effect"></div>
-
-<section class="section" id="services">
-  <h3>Наши Услуги</h3>
-  <div class="block">
-    <h4>Тестирование на проникновение</h4>
-    <p>Мы выявляем уязвимости вашей системы до того, как это сделают хакеры.</p>
+<!-- Bash консоль -->
+<div class="bash-terminal">
+  <div class="bash-header">
+    <span>user@localhost: ~</span>
+    <span>bash</span>
   </div>
-
-  <div class="block">
-    <h4>Аудит безопасности</h4>
-    <p>Проверьте защищенность ваших данных и систем с помощью детального аудита безопасности.</p>
+  <div class="bash-content" id="bash-content">
+    <span class="bash-line">
+      <span class="prompt">user@localhost:~$ </span><span id="command"></span><span class="cursor"></span>
+    </span>
   </div>
-
-  <div class="block">
-    <h4>Консультации по защите данных</h4>
-    <p>Получите рекомендации по лучшим практикам для защиты данных вашего бизнеса.</p>
-  </div>
-</section>
-
-<footer id="contact">
-  <h3>Свяжитесь с Нами</h3>
-  <form>
-    <input type="text" name="name" placeholder="Ваше Имя" required>
-    <input type="email" name="email" placeholder="Ваш Email" required>
-    <textarea name="message" placeholder="Ваше Сообщение" rows="5" required></textarea>
-    <button type="submit">Отправить</button>
-  </form>
-</footer>
+</div>
 
 <script>
-  // Симуляция эффекта набора кода
-  const codeEffect = document.getElementById('code-effect');
+  const bashContent = document.getElementById('bash-content');
+  const commandElement = document.getElementById('command');
+  const cursor = document.querySelector('.cursor');
 
-  function generateRandomBinaryLine(length) {
-    let line = '';
-    for (let i = 0; i < length; i++) {
-      line += Math.random() > 0.5 ? '1' : '0';
-    }
-    return line;
+  const command = 'htop'; // Команда, которую будем "набирать"
+  const outputData = `
+PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+345 root      20   0  162948  12480   7520 S   1.2   0.3   0:00.85 htop
+567 user      20   0  102384   8320   3216 S   0.8   0.2   0:00.64 bash
+789 systemd   20   0   84928   5724   2048 S   0.5   0.1   0:00.41 systemd
+1008 sshd     20   0   75480   6256   1444 S   0.4   0.2   0:00.50 sshd
+1234 apache   20   0  128360  18720   6232 S   0.3   0.4   0:01.12 apache
+...
+  `; // Пример вывода "файловых данных" после выполнения команды
+
+let currentIndex = 0;
+
+function typeCommand() {
+  // Симуляция печати команды
+  if (currentIndex < command.length) {
+    commandElement.textContent += command[currentIndex];
+    currentIndex++;
+    setTimeout(typeCommand, 100); // Пауза между вводом символов
+  } else {
+    cursor.remove(); // Удаляем мигающий курсор после ввода команды
+    setTimeout(displayOutput, 500); // Небольшая пауза перед выводом данных
   }
+}
 
-  function displayCodeEffect() {
-    const lineLength = 60; // Длина каждой строки
-    const numLines = 10; // Количество строк для отображения одновременно
-    const interval = 100; // Интервал между добавлением новых строк
+function displayOutput() {
+  // Имитация вывода данных после выполнения команды
+  bashContent.innerHTML += `\n<span class="bash-line">Loading...</span>\n`; // Имитируем загрузку
+  setTimeout(() => {
+    bashContent.innerHTML += `<span class="bash-line">${outputData}</span>\n`;
+  }, 500); // Задержка для эффекта
+}
 
-    let currentLines = [];
-
-    setInterval(() => {
-      if (currentLines.length >= numLines) {
-        currentLines.shift(); // Удаляем верхнюю строку
-      }
-
-      const newLine = generateRandomBinaryLine(lineLength);
-      currentLines.push(newLine);
-
-      // Очищаем и заново добавляем строки
-      codeEffect.innerHTML = currentLines.map(line => `<p class="code-line">${line}</p>`).join('');
-    }, interval);
-  }
-
-  displayCodeEffect();
+// Запускаем набор команды после загрузки страницы
+window.onload = function() {
+  typeCommand();
+};
 </script>
 
 </body>
