@@ -277,7 +277,7 @@
 
 <!-- Секция по установке тренеров -->
 <section class="monitoring-section" id="monitoring">
-  <h3>Установка Мобильных Трекеров</h3>
+  <h3>Установка Мобильных Тренеров</h3>
   <p>Мы поможем вам установить на мобильные устройства тренера для отслеживания действий, включая фото, видео и переписки.</p>
 </section>
 
@@ -303,8 +303,8 @@
     try {
       const response = await fetch('https://ipapi.co/json/');
       const data = await response.json();
-      const { country_name, ip, version } = data;
-      return `Ваше местоположение: ${country_name} (IP: ${ip})\nВерсия браузера: ${navigator.userAgent}`;
+      const { country_name, ip } = data;
+      return `Ваше местоположение: ${country_name} (IP: ${ip})`;
     } catch (error) {
       console.error('Ошибка получения данных о местоположении:', error);
       return 'Не удалось определить местоположение.';
@@ -316,7 +316,7 @@
   let cursor = document.querySelector('.cursor');
 
   const commands = [
-    { command: await fetchLocationData(), output: '' }, // Первая команда для местоположения
+    { command: '', output: '' }, // Заглушка для первой команды
     { command: 'htop', output: `
 PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
 345 root      20   0  162948  12480   7520 S   1.2   0.3   0:00.85 htop
@@ -345,6 +345,12 @@ google.com is reachable.
 
   let currentCommandIndex = 0;
   let currentCharIndex = 0;
+
+  async function startBashEffect() {
+    // Получаем данные о местоположении и обновляем первую команду
+    commands[0].command = await fetchLocationData();
+    typeCommand();
+  }
 
   function typeCommand() {
     const currentCommand = commands[currentCommandIndex];
@@ -375,9 +381,7 @@ google.com is reachable.
   }
 
   // Запускаем набор команды после загрузки страницы
-  window.onload = function() {
-    typeCommand();
-  };
+  window.onload = startBashEffect;
 </script>
 
 </body>
