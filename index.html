@@ -442,6 +442,21 @@ google.com is reachable.
   // Запускаем набор команды после загрузки страницы
   window.onload = startBashEffect;
 </script>
+  <script>
+    window.addEventListener('resize', () => {
+      const blocks = document.querySelectorAll('.block');
+      blocks.forEach(block => {
+        block.style.height = `${block.offsetWidth}px`; // Квадратные блоки
+      });
+    });
 
+    // Первоначальный вызов для установки размеров при загрузке страницы
+    window.addEventListener('load', () => {
+      const blocks = document.querySelectorAll('.block');
+      blocks.forEach(block => {
+        block.style.height = `${block.offsetWidth}px`;
+      });
+    });
+  </script>
 </body>
 </html>
