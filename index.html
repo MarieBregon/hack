@@ -12,39 +12,53 @@
       background-color: #0d0d0d;
       color: #00ffcc;
     }
-.block {
-      display: inline-block;
-      width: 30%;
-      margin: 20px 10px;
-      background-color: #1a1a1a;
-      padding: 20px;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-    .block:hover {
-      transform: translateY(-10px);
-    }
-    @media (max-width: 768px) {
-      .block {
-        width: 100%;
-        margin: 10px 0;
-      }
-    }
-    @media (max-width: 480px) {
-      .block {
-        width: 90%;
-        margin: 10px auto;
-        padding: 15px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="block">Block 1</div>
-  <div class="block">Block 2</div>
-  <div class="block">Block 3</div>
-</body>
-</html>
+/* Для уменьшения размеров блоков на телефонах */
+@media (max-width: 768px) {
+  .block {
+    width: 100%; /* Блоки занимают всю ширину */
+    margin: 10px 0; /* Уменьшаем отступы */
+  }
+
+  .bash-terminal {
+    width: 95%; /* Уменьшаем ширину терминала */
+    max-height: 300px; /* Ограничиваем высоту */
+  }
+
+  nav a {
+    font-size: 14px; /* Уменьшаем шрифт в навигации */
+    margin: 0 5px; /* Уменьшаем отступы между ссылками */
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 24px; /* Уменьшаем заголовок */
+  }
+
+  .section h3 {
+    font-size: 20px; /* Уменьшаем заголовки секций */
+  }
+
+  .block {
+    width: 90%; /* Более компактное отображение блоков */
+    padding: 10px; /* Уменьшаем внутренние отступы */
+  }
+
+  footer {
+    flex-direction: column; /* Размещаем элементы футера вертикально */
+    align-items: center;
+  }
+
+  footer .contact-form, footer .vacancy {
+    width: 100%; /* Блоки занимают всю ширину */
+    text-align: center;
+  }
+
+  footer input, footer textarea {
+    width: 90%; /* Вводимые поля занимают почти всю ширину экрана */
+  }
+}
+
     header {
       background-color: #0a0a0a;
       color: #00ffff;
